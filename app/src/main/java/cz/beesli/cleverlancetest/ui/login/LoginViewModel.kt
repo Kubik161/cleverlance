@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cz.beesli.cleverlancetest.R
+import cz.beesli.cleverlancetest.data.Event
 import cz.beesli.cleverlancetest.data.LoginRepository
 import cz.beesli.cleverlancetest.data.model.LoginNotification
-import cz.beesli.cleverlancetest.data.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
