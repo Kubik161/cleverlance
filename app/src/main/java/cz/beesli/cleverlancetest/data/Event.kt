@@ -1,4 +1,4 @@
-package cz.beesli.cleverlancetest.util
+package cz.beesli.cleverlancetest.data
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.
