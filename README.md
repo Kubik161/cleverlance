@@ -1,2 +1,2 @@
-# cleverlance
-implementation of Cleverlance new developer test
+# Cleverlance
+Implementation of Cleverlance new developer test
