@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Juroska</string>
+    <!-- Strings related to login -->
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="invalid_username">Username cannot be empty</string>
+    <string name="invalid_password">Password cannot be empty</string>
+    <string name="welcome">"Login successful !"</string>
+    <string name="login_failed">"Login failed"</string>
+</resources>
