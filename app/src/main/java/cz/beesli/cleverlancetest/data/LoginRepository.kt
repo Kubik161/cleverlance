@@ -12,12 +12,12 @@ import org.koin.core.KoinComponent
 
 /**
  * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of login status and user credentials information.
+ * maintains an in-memory cache of login status
  */
 
 class LoginRepository(private val dataSource: CleverlanceServiceApi) : KoinComponent {
 
-    // in-memory cache of the Result object
+    // in-memory cache of the LoginResult object
     private var user: LoginResult?
 
     private val isLoggedIn: Boolean

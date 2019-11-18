@@ -24,7 +24,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _notifyUser = MutableLiveData<Event<LoginNotification>>()
     val notifyUser : LiveData<Event<LoginNotification>> = _notifyUser
 
-
+    //perform login request and notify view about result (either success or error)
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
         CoroutineScope(Dispatchers.IO).launch {
@@ -58,10 +58,12 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                     )
                 )
             }
+            //...and notify user
             _notifyUser.postValue(event)
         }
     }
 
+    //validate username and password, notify view about errors
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
             _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)

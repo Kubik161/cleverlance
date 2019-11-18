@@ -30,12 +30,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
 
+        // We could use data binding to show data in views, but in this case it's not needed.
+        // We are interested in user input, not in showing data to user
         val username = findViewById<EditText>(cz.beesli.cleverlancetest.R.id.username)
         val password = findViewById<EditText>(cz.beesli.cleverlancetest.R.id.password)
         val login = findViewById<Button>(cz.beesli.cleverlancetest.R.id.login)
         val loading = findViewById<ProgressBar>(cz.beesli.cleverlancetest.R.id.loading)
         val image = findViewById<ImageView>(cz.beesli.cleverlancetest.R.id.image)
 
+        //observe user input and show errors or activate login button
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
@@ -51,12 +54,15 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
+        //observe changes in server response
         loginViewModel.loggedInUserView.observe(this@LoginActivity, Observer {
             val loggedInUserView = it ?: return@Observer
 
             if (loggedInUserView.bitmapByteArray != null) {
 
                 login.visibility = View.GONE
+                username.visibility = View.GONE
+                password.visibility = View.GONE
                 image.visibility = View.VISIBLE
 
                 val displayMetrics = this@LoginActivity.resources.displayMetrics
@@ -64,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
+        //handle one-time events (show info to user, handle visibilities, etc)
         loginViewModel.notifyUser.observe(this@LoginActivity, Observer { event ->
             event.getContentIfNotHandled()?.let { loginNotification ->
 
@@ -104,15 +111,9 @@ class LoginActivity : AppCompatActivity() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE -> {
-                        loading.visibility = View.VISIBLE
-                        username.visibility = View.GONE
-                        password.visibility = View.GONE
-                        login.visibility = View.GONE
-
-                        loginViewModel.login(
-                            username.text.toString().trim(),
-                            password.text.toString().trim()
-                        )
+                        if (login.isEnabled) {
+                            login.performClick()
+                        }
                     }
                 }
                 false
